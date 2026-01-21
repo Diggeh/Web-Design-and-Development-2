@@ -1,33 +1,19 @@
 import experess from "express";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = experess();
 const PORT = 3000;
+dotenv.config();
 
 // get -> display name, var name = "Your Name"
 // post -> logic, if username="admin" and password="admin" -> success else failed
 
 app.use(experess.json());
-
-app.get("/getName", (req, res) => {
-  var name = "Your Name";
-  res.status(200).json(name);
-});
-
-app.post("/login", (req, res) => {
-  var { username, password } = req.body;
-  if (username === "admin" && password === "admin") {
-    res.status(200).json({
-      message: "Login Successfully.",
-      status: "success",
-    });
-  } else {
-    res.status(403).json({
-      message: "Invalid username or password.",
-      status: "failed",
-    });
-  }
-});
+app.use("/api/auth", authRoutes);
 
 app.listen(PORT, () => {
+  connectDB();
   console.log(`Server is running on PORT: ${PORT}`);
 });
