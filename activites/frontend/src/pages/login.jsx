@@ -2,11 +2,11 @@ import { useState } from "react";
 import Card from "../components/Card";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import "./login.css";
+import "../styles/Login.css";
 
 const Login = () => {
   const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState();
   return (
     <Card title="Welcome Back">
       <form className="login-form">
@@ -36,3 +36,5 @@ const Login = () => {
     </Card>
   );
 };
+
+export default Login;
