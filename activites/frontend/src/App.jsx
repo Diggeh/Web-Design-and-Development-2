@@ -1,11 +1,14 @@
-import Login from "./pages/login.jsx";
+import Login from "./pages/login";
 import "./App.css";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <div>
-      <Login></Login>
-    </div>
+    <>
+      <AuthProvider>
+        <Login></Login>
+      </AuthProvider>
+    </>
   );
 }
 
