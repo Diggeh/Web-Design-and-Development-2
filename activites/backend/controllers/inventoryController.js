@@ -5,24 +5,22 @@ export const create = async (req, res) => {
   try {
     const { name, slug, description, price } = req.body;
     const productExists = await Product.findOne({ slug });
-    if (productExists) {
-      return res.status(400).json({ message: "Product already exists" });
-    }
+    if (productExists)
+      return res.status(400).json({ message: "Product Already Exists!" });
     const product = await Product.create({ name, slug, description, price });
-    res.status(201).json({ message: "Product listing successfully", product });
+    res.status(201).json({ message: "Product created successfully! " });
   } catch (error) {
-    res.status(300).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
 export const update = async (req, res) => {
   try {
-    const { objectId } = req.params;
+    const { id } = req.params;
     const { name, slug, description, price } = req.body;
-    const productExists = await Product.findOne({ slug });
-    if (!productExists) {
-      return res.status(400).json({ message: "Product does not exist" });
-    }
+    const productExists = await Product.findById(id);
+    if (!productExists)
+      return res.status(400).json({ message: "Product Does Not Exists!" });
     const productFields = {
       name,
       slug,
@@ -31,11 +29,15 @@ export const update = async (req, res) => {
       updatedAt: new Date(),
     };
     const product = await Product.updateOne(
-      { _id: mongoose.Types.ObjectId(objectId) },
+      { _id: new mongoose.Types.ObjectId(id) },
       { $set: productFields },
     );
-    res.status(201).json({ message: "Product updated successfully" });
+    res.status(200).json({ message: "Product updated successfully! " });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+};
+
+export const logout = (req, res) => {
+  res.status(200).json({ message: "Logout successfully" });
 };

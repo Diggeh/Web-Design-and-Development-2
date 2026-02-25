@@ -1,4 +1,5 @@
 import "../styles/Card.css";
+
 const Card = ({ title, children }) => {
   return (
     <div className="card-container">
@@ -9,4 +10,5 @@ const Card = ({ title, children }) => {
     </div>
   );
 };
+
 export default Card;
