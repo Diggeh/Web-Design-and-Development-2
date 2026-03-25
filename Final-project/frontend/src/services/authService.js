@@ -17,11 +17,11 @@ export const authService = {
     localStorage.setItem("token", data.token);
     localStorage.setItem(
       "user",
-      JSON.stringify({ _id: data._id, username: data.username }),
+      JSON.stringify({ _id: data._id, username: data.username, role: data.role }),
     );
     return {
       token: data.token,
-      user: { _id: data._id, username: data.username },
+      user: { _id: data._id, username: data.username, role: data.role },
     };
   },
 
